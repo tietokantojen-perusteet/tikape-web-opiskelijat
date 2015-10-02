@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Otsikko</title>
+        <meta charset="utf-8" /> 
+    </head>
+
+    <body>
+        <h1>Opiskelijat</h1>
+
+        <ul>
+            <li th:each="opiskelija: ${opiskelijat}">
+                <span th:text="${opiskelija.id}">1</span> <span th:text="${opiskelija.nimi}">Essi esimerkki</span>
+                <form method="POST" th:action="@{~/opiskelijat/{opiskelijaId}/delete(opiskelijaId=${opiskelija.id})}"><input type="submit" value="Poista"/></form>
+            </li>
+        </ul>
+
+        <h2>Opiskelijat</h2>
+
+        <form method="POST" action="/opiskelijat">
+            Nimi:<br/>
+            <input type="text" name="nimi"/>
+            <input type="submit" value="Lisää!"/>            
+        </form>
+    </body>
+</html>
