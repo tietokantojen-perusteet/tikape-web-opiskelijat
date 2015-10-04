@@ -15,7 +15,7 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
     @Override
     public Opiskelija findOne(Integer key) throws SQLException {
-        List<Opiskelija> asiakkaat = this.database.queryAndCollect("SELECT * FROM Asiakas WHERE id = '?'", new OpiskelijaCollector(), key);
+        List<Opiskelija> asiakkaat = this.database.queryAndCollect("SELECT * FROM Opiskelija WHERE id = '?'", new OpiskelijaCollector(), key);
         if (asiakkaat.isEmpty()) {
             return null;
         }
@@ -25,12 +25,12 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
     @Override
     public void save(Opiskelija opiskelija) throws SQLException {
-        this.database.update("INSERT INTO Asiakas (nimi) VALUES (?)", opiskelija.getNimi());
+        this.database.update("INSERT INTO Opiskelija (nimi) VALUES (?)", opiskelija.getNimi());
     }
 
     @Override
     public List<Opiskelija> findAll() throws SQLException {
-        return this.database.queryAndCollect("SELECT * FROM Asiakas", new OpiskelijaCollector());
+        return this.database.queryAndCollect("SELECT * FROM Opiskelija", new OpiskelijaCollector());
     }
 
     @Override
