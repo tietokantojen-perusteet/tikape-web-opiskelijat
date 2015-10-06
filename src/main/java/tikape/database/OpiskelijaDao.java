@@ -15,7 +15,7 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
     @Override
     public Opiskelija findOne(Integer key) throws SQLException {
-        List<Opiskelija> asiakkaat = this.database.queryAndCollect("SELECT * FROM Opiskelija WHERE id = '?'", new OpiskelijaCollector(), key);
+        List<Opiskelija> asiakkaat = this.database.queryAndCollect("SELECT * FROM Opiskelija WHERE id = ?", new OpiskelijaCollector(), key);
         if (asiakkaat.isEmpty()) {
             return null;
         }
