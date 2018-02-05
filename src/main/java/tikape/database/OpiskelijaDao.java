@@ -15,17 +15,12 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
     @Override
     public Opiskelija findOne(Integer key) throws SQLException {
-        List<Opiskelija> asiakkaat = this.database.queryAndCollect("SELECT * FROM Opiskelija WHERE id = ?", new OpiskelijaCollector(), key);
-        if (asiakkaat.isEmpty()) {
-            return null;
-        }
-
-        return asiakkaat.get(0);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void save(Opiskelija opiskelija) throws SQLException {
-        this.database.update("INSERT INTO Opiskelija (nimi) VALUES (?)", opiskelija.getNimi());
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
