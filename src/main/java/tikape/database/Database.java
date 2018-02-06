@@ -6,11 +6,15 @@ import java.util.*;
 public class Database {
 
     private boolean debug;
-    private Connection connection;
+    private String address;
 
     public Database(String driver, String address) throws Exception {
         Class.forName(driver);
-        this.connection = DriverManager.getConnection(address);
+        this.address = address;
+    }
+
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(this.address);
     }
 
     public void setDebugMode(boolean d) {
@@ -25,6 +29,8 @@ public class Database {
         }
 
         List<T> rows = new ArrayList<>();
+        
+        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement(query);
         for (int i = 0; i < params.length; i++) {
             stmt.setObject(i + 1, params[i]);
@@ -45,10 +51,12 @@ public class Database {
 
         rs.close();
         stmt.close();
+        connection.close();
         return rows;
     }
 
     public int update(String updateQuery, Object... params) throws SQLException {
+        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement(updateQuery);
 
         for (int i = 0; i < params.length; i++) {
@@ -64,6 +72,7 @@ public class Database {
             System.out.println("---");
         }
         stmt.close();
+        connection.close();
 
         return changes;
     }
